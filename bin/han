@@ -1,0 +1,7 @@
+#!/usr/bin/env ruby
+require 'hancli'
+
+puts "Wellcome to han-cli"
+Hancli::Terminal.clear_fast
+list = Hancli::WordList.new('data/hsk_L1.txt', 'progress.csv')
+list.play(5)
