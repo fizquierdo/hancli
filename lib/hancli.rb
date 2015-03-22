@@ -3,7 +3,7 @@ require 'rainbow'
 
 class String
 	def strip_tone
-		self.gsub(/[0-5]/, '').gsub(' ','')
+		self.gsub(/[0-5]/, '')
 	end
 end
 
@@ -21,14 +21,14 @@ module Hancli
 	end
 	class Answer
 		def initialize(pinyin_num)
-			@answer = gets.chomp
-			@pinyin_num = pinyin_num
+			@answer = gets.chomp.gsub(' ','').capitalize
+			@pinyin_num = pinyin_num.gsub(' ','').capitalize
 		end
 		def correct?
-			@answer.capitalize == @pinyin_num.capitalize
+			@answer == @pinyin_num
 		end
 		def tone_correct?
-			@answer.strip_tone.capitalize == @pinyin_num.strip_tone.capitalize
+			@answer.strip_tone == @pinyin_num.strip_tone
 		end
 	end
 	
