@@ -47,8 +47,8 @@ module Hancli
 		def to_s
 			[@simpl, @pinyin, @eng, rate].join("\t")
 		end
-		def to_csv
-			[@simpl, @attempts, @guess].join(",")
+		def to_tsv
+			[@simpl, @attempts, @guess].join("\t")
 		end
 		def rate
 			return 0.0 if @attempts == 0
@@ -86,7 +86,7 @@ module Hancli
 			progress = {}
 			if File.exist?(@progress_file)
 				File.open(@progress_file).each_line do |l|
-					simpl, attempts, guess = l.rstrip.split(",")
+					simpl, attempts, guess = l.rstrip.split("\t")
 					progress[simpl] = {attempts: attempts.to_i, guess: guess.to_i}
 				end
 			end
@@ -107,7 +107,7 @@ module Hancli
 		end
 		def save
 			File.open(@progress_file, "w") do |f|
-				@words.each{|w| f.puts w.to_csv}
+				@words.each{|w| f.puts w.to_tsv}
 			end
 		end
 		def evaluate_word
